@@ -1,0 +1,30 @@
+{
+    "tasks": [
+        {
+            "type": "che",
+            "label": "run webapp",
+            "command": "SPRING_DATASOURCE_URL=jdbc:mysql://db/petclinic \\\nSPRING_DATASOURCE_USERNAME=petclinic \\\nSPRING_DATASOURCE_PASSWORD=petclinic \\\njava -jar -Dspring.profiles.active=mysql \\\n-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 \\\ntarget/*.jar\n",
+            "target": {
+                "workingDir": "${CHE_PROJECTS_ROOT}/web-java-spring-petclinic",
+                "component": "tools"
+            }
+        },
+        {
+            "type": "che",
+            "label": "prepare database",
+            "command": "/opt/rh/rh-mysql57/root/usr/bin/mysql -u root < ${CHE_PROJECTS_ROOT}/web-java-spring-petclinic/src/main/resources/db/mysql/user.sql &&\n/opt/rh/rh-mysql57/root/usr/bin/mysql -u root petclinic < ${CHE_PROJECTS_ROOT}/web-java-spring-petclinic/src/main/resources/db/mysql/schema.sql &&\necho -e \"\\e[32mDone.\\e[0m Database petclinic was configured!\"\n",
+            "target": {
+                "component": "mysql"
+            }
+        },
+        {
+            "type": "che",
+            "label": "maven build",
+            "command": "mvn clean install",
+            "target": {
+                "workingDir": "${CHE_PROJECTS_ROOT}/web-java-spring-petclinic",
+                "component": "tools"
+            }
+        }
+    ]
+}
