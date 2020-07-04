@@ -1,4 +1,4 @@
 =========
 
-## Spring Data MongoDB
+## Spring-boot sample projects
 
