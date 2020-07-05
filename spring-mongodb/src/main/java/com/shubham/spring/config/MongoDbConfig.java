@@ -16,7 +16,7 @@ public class MongoDbConfig {
     @Bean
     CommandLineRunner commandLineRunner(UserRepository userRepository) {
         return strings -> {
-            userRepository.save(new User("1", "Peter", "Development"));
+            userRepository.save(new User("1", "Shubham", "Development"));
             userRepository.save(new User("2", "Sam", "Operations"));
         };
     }
