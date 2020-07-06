@@ -1,13 +1,8 @@
+HELP.md
 target/
-
-**/target/
-
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
-
-/spring-mongodb/src/main/resources/application.properties
-/spring-security/src/main/resources/application.properties
 
 ### STS ###
 .apt_generated
