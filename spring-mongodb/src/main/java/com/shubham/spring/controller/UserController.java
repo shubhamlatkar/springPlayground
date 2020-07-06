@@ -1,6 +1,8 @@
 package com.shubham.spring.controller;
 
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,10 +20,8 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/all")
-    public List<Users> getAll() {
-        userRepository.save(new Users("Shubham", "kiran", 1234L));
-        
-        return userRepository.findAll();
+    @GetMapping("/")
+    public ResponseEntity<List<Users>> getAll() {
+        return ResponseEntity.ok(userRepository.findAll());
     }
 }
