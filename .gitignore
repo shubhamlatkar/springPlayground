@@ -7,7 +7,7 @@ target/
 !**/src/test/**
 
 /spring-mongodb/src/main/resources/application.properties
-/spring-security/src/main/resources/application.properties
+**/application.properties
 
 ### STS ###
 .apt_generated
