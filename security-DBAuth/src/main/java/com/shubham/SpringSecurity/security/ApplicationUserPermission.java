@@ -1,4 +1,4 @@
-package com.shubham.springSecurity.security;
+package com.shubham.SpringSecurity.security;
 
 public enum ApplicationUserPermission {
     STUDENT_READ("student:read"),
@@ -15,4 +15,6 @@ public enum ApplicationUserPermission {
     public String getPermission() {
         return permission;
     }
+
+    
 }
