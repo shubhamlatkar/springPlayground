@@ -1,24 +1,26 @@
 package com.shubham.springSecurity.security;
 
+import static com.shubham.springSecurity.security.ApplicationUserRole.ADMIN;
+import static com.shubham.springSecurity.security.ApplicationUserRole.ADMINTRAINEE;
+import static com.shubham.springSecurity.security.ApplicationUserRole.STUDENT;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import static com.shubham.springSecurity.security.ApplicationUserPermission.*;
-import static com.shubham.springSecurity.security.ApplicationUserRole.*;
 
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
@@ -30,15 +32,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/").permitAll().antMatchers("/api/students/**")
-                .hasRole(ApplicationUserRole.STUDENT.name()).antMatchers(HttpMethod.DELETE, "/management/students/**")
-                .hasAuthority(STUDENT_WRITE.getPermission())
-                .antMatchers(HttpMethod.POST, "/management/students/**")
-                .hasAuthority(STUDENT_WRITE.getPermission())
-                .antMatchers(HttpMethod.PUT, "/management/students/**") 
-                .hasAuthority(STUDENT_WRITE.getPermission())
-                .antMatchers(HttpMethod.GET, "/management/students/**")
-                .hasAnyRole(ApplicationUserRole.ADMIN.name(), ApplicationUserRole.ADMINTRAINEE.name())
+        http.csrf().disable().authorizeRequests().antMatchers("/").permitAll()
+                .antMatchers("/api/students/**")
+                .hasRole(ApplicationUserRole.STUDENT.name())
+                // .antMatchers(HttpMethod.DELETE, "/management/students/**")
+                // .hasAuthority(STUDENT_WRITE.getPermission())
+                // .antMatchers(HttpMethod.POST, "/management/students/**")
+                // .hasAuthority(STUDENT_WRITE.getPermission())
+                // .antMatchers(HttpMethod.PUT, "/management/students/**") 
+                // .hasAuthority(STUDENT_WRITE.getPermission())
+                // .antMatchers(HttpMethod.GET, "/management/students/**")
+                // .hasAnyRole(ApplicationUserRole.ADMIN.name(), ApplicationUserRole.ADMINTRAINEE.name())
                 .anyRequest()
                 .authenticated().and().httpBasic();
     }

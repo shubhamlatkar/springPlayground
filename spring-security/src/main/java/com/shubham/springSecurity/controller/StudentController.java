@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.shubham.springSecurity.model.Student;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,21 +35,25 @@ public class StudentController {
     }
 
     @GetMapping("/management/students")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
     public List<Student> getStudents() {
         return STUDENTS;
     }
 
     @DeleteMapping("/management/students/{id}")
+    @PreAuthorize("hasAuthority('student:write')")
     public void delStudent(@PathVariable int id) {
         System.out.println("In del" + id);
     }
     
     @PostMapping("/management/students")
+    @PreAuthorize("hasAuthority('student:write')")
     public void addStudent(@RequestBody Student student) {
         System.out.println("post insert" + student);
     }
 
     @PutMapping("/management/students/{id}")
+    @PreAuthorize("hasAuthority('student:write')")
     public void updateStudent(@PathVariable int id,@RequestBody Student student ) {
         System.out.println("In update" + id + student);
     }
