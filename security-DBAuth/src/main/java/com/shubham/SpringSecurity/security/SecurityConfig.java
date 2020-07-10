@@ -1,19 +1,26 @@
 package com.shubham.SpringSecurity.security;
 
+import static com.shubham.SpringSecurity.security.ApplicationUserRole.ADMIN;
+import static com.shubham.SpringSecurity.security.ApplicationUserRole.ADMINTRAINEE;
+import static com.shubham.SpringSecurity.security.ApplicationUserRole.STUDENT;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
@@ -25,7 +32,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/students/**").hasRole(ApplicationUserRole.STUDENT.name()).anyRequest()
+        http.csrf().disable().authorizeRequests().antMatchers("/").permitAll()
+                .antMatchers("/api/students/**")
+                .hasRole(ApplicationUserRole.STUDENT.name())
+                // .antMatchers(HttpMethod.DELETE, "/management/students/**")
+                // .hasAuthority(STUDENT_WRITE.getPermission())
+                // .antMatchers(HttpMethod.POST, "/management/students/**")
+                // .hasAuthority(STUDENT_WRITE.getPermission())
+                // .antMatchers(HttpMethod.PUT, "/management/students/**") 
+                // .hasAuthority(STUDENT_WRITE.getPermission())
+                // .antMatchers(HttpMethod.GET, "/management/students/**")
+                // .hasAnyRole(ApplicationUserRole.ADMIN.name(), ApplicationUserRole.ADMINTRAINEE.name())
+                .anyRequest()
                 .authenticated().and().httpBasic();
     }
 
@@ -33,11 +51,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     protected UserDetailsService userDetailsService() {
         UserDetails shuLat = User.builder().username("shu").password(passwordEncoder.encode("12as"))
-                .roles(ApplicationUserRole.ADMIN.name()).build();
+                // .roles(ApplicationUserRole.ADMIN.name())
+                .authorities(ADMIN.getGrantedAuthorities())
+                .build();
 
         UserDetails knuLat = User.builder().username("knu").password(passwordEncoder.encode("12as"))
-                .roles(ApplicationUserRole.STUDENT.name()).build();
-        return new InMemoryUserDetailsManager(shuLat, knuLat);
+                // .roles(ApplicationUserRole.STUDENT.name())
+                .authorities(STUDENT.getGrantedAuthorities())
+                .build();
+
+        UserDetails ps = User.builder().username("ps").password(passwordEncoder.encode("12as"))
+                // .roles(ApplicationUserRole.ADMINTRAINEE.name())
+                .authorities(ADMINTRAINEE.getGrantedAuthorities())
+                .build();
+
+        return new InMemoryUserDetailsManager(shuLat, knuLat, ps);
     }
 
 }
