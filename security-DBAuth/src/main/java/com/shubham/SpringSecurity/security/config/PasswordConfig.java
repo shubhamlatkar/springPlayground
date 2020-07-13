@@ -1,4 +1,4 @@
-package com.shubham.SpringSecurity.security;
+package com.shubham.SpringSecurity.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

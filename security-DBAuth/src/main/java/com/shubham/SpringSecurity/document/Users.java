@@ -1,51 +1,46 @@
-package com.shubham.SpringSecurity.model;
+package com.shubham.SpringSecurity.document;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+import java.util.Objects;
 
 @Document
-public class User {
+public class Users {
+
     @Id
     private String id;
-
-    @NotBlank
-    @Size(max = 20)
     private String username;
-
-    @NotBlank
-    @Size(max = 50)
-    @Email
     private String email;
-
-    @NotBlank
-    @Size(max = 120)
     private String password;
+    private List<Role> roles;
 
-    @DBRef
-    private Set<Role> roles = new HashSet<>();
-
-    public User() {
+    public Users() {
     }
 
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User(String id, @NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password, Set<Role> roles) {
-        this.id = id;
+    public Users( String username, String email, String password, List<Role> roles) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Users users = (Users) o;
+        return id.equals(users.id) &&
+                username.equals(users.username) &&
+                email.equals(users.email) &&
+                password.equals(users.password) &&
+                roles.equals(users.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, email, password, roles);
     }
 
     public String getId() {
@@ -80,25 +75,22 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
+        return "Users{" +
+                "id='" + id + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", password=" + password +
                 ", roles=" + roles +
                 '}';
     }
 }
-
-
-

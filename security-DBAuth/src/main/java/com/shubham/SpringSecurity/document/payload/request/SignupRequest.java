@@ -1,4 +1,4 @@
-package com.shubham.SpringSecurity.payload.request;
+package com.shubham.SpringSecurity.document.payload.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

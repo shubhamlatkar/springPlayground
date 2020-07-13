@@ -1,4 +1,4 @@
-package com.shubham.SpringSecurity.payload.response;
+package com.shubham.SpringSecurity.document.payload.response;
 
 
 public class MessageResponse {

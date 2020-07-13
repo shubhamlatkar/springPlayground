@@ -1,6 +1,7 @@
 package com.shubham.SpringSecurity.security.services;
 
-import com.shubham.SpringSecurity.model.User;
+import com.shubham.SpringSecurity.document.Authorities;
+import com.shubham.SpringSecurity.document.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,10 +44,27 @@ public class UserDetailsImpl implements UserDetails {
         this.id = id;
     }
 
-    public static UserDetailsImpl build(User user) {
+    public static UserDetailsImpl build(Users user) {
         List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
                 .collect(Collectors.toList());
+
+//        authorities.add(user.getRoles()
+//                .stream()
+//                .map(role -> {
+//                    return role.getAuthoritiesList()
+//                           .stream()
+//                           .map(authorities1 -> new SimpleGrantedAuthority(authorities1.getAuthority()))
+//                           .collect(Collectors.toList());
+//                })
+//                .collect(Collectors.toList())
+//        );
+
+        user.getRoles().forEach(role -> {
+            for (Authorities authorities1 : role.getAuthoritiesList()) {
+                authorities.add(new SimpleGrantedAuthority(authorities1.getAuthority()));
+            }
+        });
 
         return new UserDetailsImpl(
                 authorities,
