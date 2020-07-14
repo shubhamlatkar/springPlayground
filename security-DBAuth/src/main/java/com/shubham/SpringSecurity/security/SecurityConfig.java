@@ -2,6 +2,7 @@ package com.shubham.SpringSecurity.security;
 
 import com.shubham.SpringSecurity.security.config.PasswordConfig;
 import com.shubham.SpringSecurity.security.services.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -19,11 +20,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserDetailsServiceImpl();
+        return new UserDetailsServiceImpl(passwordConfig);
     }
 
     private final PasswordConfig passwordConfig;
 
+    @Autowired
     public SecurityConfig(PasswordConfig passwordConfig) {
         this.passwordConfig = passwordConfig;
     }

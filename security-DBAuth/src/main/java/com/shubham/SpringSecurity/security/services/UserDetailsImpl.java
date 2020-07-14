@@ -14,32 +14,16 @@ import java.util.stream.Collectors;
 public class UserDetailsImpl implements UserDetails {
 
 
-    private final Set<? extends GrantedAuthority> grantedAuthorities;
-    private final String password;
     private final String username;
-    private final Boolean isAccountNonExpired;
-    private final Boolean isAccountNonLocked;
-    private final Boolean isCredentialsNonExpired;
-    private final Boolean isEnabled;
+    private final String password;
+    private final Set<GrantedAuthority> grantedAuthorities;
     private final String email;
     private final String id;
 
-    public UserDetailsImpl(
-            Set<? extends GrantedAuthority> grantedAuthorities,
-            String password,
-            String username,
-            Boolean isAccountNonExpired,
-            Boolean isAccountNonLocked,
-            Boolean isCredentialsNonExpired,
-            Boolean isEnabled,
-            String email, String id) {
-        this.grantedAuthorities = grantedAuthorities;
-        this.password = password;
+    public UserDetailsImpl(String username, String password, Set<GrantedAuthority> grantedAuthorities, String email, String id) {
         this.username = username;
-        this.isAccountNonExpired = isAccountNonExpired;
-        this.isAccountNonLocked = isAccountNonLocked;
-        this.isCredentialsNonExpired = isCredentialsNonExpired;
-        this.isEnabled = isEnabled;
+        this.password = password;
+        this.grantedAuthorities = grantedAuthorities;
         this.email = email;
         this.id = id;
     }
@@ -65,37 +49,14 @@ public class UserDetailsImpl implements UserDetails {
                 authorities.add(new SimpleGrantedAuthority(authorities1.getAuthority()));
             }
         });
+
         return new UserDetailsImpl(
-                authorities,
-                user.getPassword(),
                 user.getUsername(),
-                true,
-                true,
-                true,
-                true,
+                user.getPassword(),
+                authorities,
                 user.getEmail(),
                 user.getId()
         );
-    }
-
-    public Set<? extends GrantedAuthority> getGrantedAuthorities() {
-        return grantedAuthorities;
-    }
-
-    public Boolean getAccountNonExpired() {
-        return isAccountNonExpired;
-    }
-
-    public Boolean getAccountNonLocked() {
-        return isAccountNonLocked;
-    }
-
-    public Boolean getCredentialsNonExpired() {
-        return isCredentialsNonExpired;
-    }
-
-    public Boolean getEnabled() {
-        return isEnabled;
     }
 
     public String getEmail() {
@@ -108,51 +69,36 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.grantedAuthorities;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDetailsImpl{" +
-                "grantedAuthorities=" + grantedAuthorities +
-                ", password='" + password + '\'' +
-                ", username='" + username + '\'' +
-                ", isAccountNonExpired=" + isAccountNonExpired +
-                ", isAccountNonLocked=" + isAccountNonLocked +
-                ", isCredentialsNonExpired=" + isCredentialsNonExpired +
-                ", isEnabled=" + isEnabled +
-                ", email='" + email + '\'' +
-                ", id='" + id + '\'' +
-                '}';
+        return true;
     }
 }

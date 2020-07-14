@@ -2,6 +2,7 @@ package com.shubham.SpringSecurity.controller;
 
 
 import com.shubham.SpringSecurity.document.Student;
+import com.shubham.SpringSecurity.repository.AuthoritiesRepository;
 import com.shubham.SpringSecurity.repository.RoleRepository;
 import com.shubham.SpringSecurity.repository.UserRepository;
 import com.shubham.SpringSecurity.security.config.PasswordConfig;
@@ -18,15 +19,17 @@ public class TestController {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final PasswordConfig passwordConfig;
+    private final AuthoritiesRepository authoritiesRepository;
 
     private static final List<Student> STUDENTS = Arrays.asList(new Student(1, "shubham"), new Student(2, "Kunal"),
             new Student(3, "PS"));
 
     @Autowired
-    public TestController(RoleRepository roleRepository, UserRepository userRepository, PasswordConfig passwordConfig) {
+    public TestController(RoleRepository roleRepository, UserRepository userRepository, PasswordConfig passwordConfig, AuthoritiesRepository authoritiesRepository) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.passwordConfig = passwordConfig;
+        this.authoritiesRepository = authoritiesRepository;
     }
 
     @GetMapping("/")
@@ -44,10 +47,19 @@ public class TestController {
 //                "shu",
 //                "shu@shu.com",
 //                passwordConfig.passwordEncoder().encode("12as"),
-//                Collections.singletonList(
-//                        roleRepository.findByRole("USER")
+//                Arrays.asList(
+//                        roleRepository.findByRole("USER"),
+//                        roleRepository.findByRole("ADMIN")
 //                )
 //        ));
+
+//        List<Role> roles = Collections.singletonList(
+//                new Role("USER", Collections.singletonList(
+//                        authoritiesRepository.findByAuthority("user:read")
+//                ))
+//        );
+//
+//        roleRepository.insert(roles);
         return "STUDENT api in memory authentication DB Auth";
     }
 
