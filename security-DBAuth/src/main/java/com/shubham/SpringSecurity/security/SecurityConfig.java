@@ -1,7 +1,7 @@
 package com.shubham.SpringSecurity.security;
 
+import com.shubham.SpringSecurity.security.config.PasswordConfig;
 import com.shubham.SpringSecurity.security.services.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -10,22 +10,24 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
-
-    private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public SecurityConfig(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsServiceImpl();
     }
+
+    private final PasswordConfig passwordConfig;
+
+    public SecurityConfig(PasswordConfig passwordConfig) {
+        this.passwordConfig = passwordConfig;
+    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -33,16 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                // .antMatchers(HttpMethod.DELETE, "/management/students/**")
-                // .hasAuthority(STUDENT_WRITE.getPermission())
-                // .antMatchers(HttpMethod.POST, "/management/students/**")
-                // .hasAuthority(STUDENT_WRITE.getPermission())
-                // .antMatchers(HttpMethod.PUT, "/management/students/**")
-                // .hasAuthority(STUDENT_WRITE.getPermission())
-                // .antMatchers(HttpMethod.GET, "/management/students/**")
-                // .hasAnyRole(ApplicationUserRole.ADMIN.name(), ApplicationUserRole.ADMINTRAINEE.name())
                 .anyRequest()
                 .authenticated()
+                .antMatchers("/test/**").hasRole("USER")
                 .and()
                 .httpBasic();
     }
@@ -53,11 +48,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
 
+//    @Autowired
+//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("shu").password(passwordEncoder.encode("12as"))
+//                .authorities("ROLE_USER", "user:write");
+//    }
+
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService(userDetailsService);
+        provider.setUserDetailsService(userDetailsService());
+        provider.setPasswordEncoder(passwordConfig.passwordEncoder());
         return provider;
     }
 

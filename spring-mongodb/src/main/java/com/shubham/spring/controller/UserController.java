@@ -47,14 +47,14 @@ public class UserController {
 //
 //        roleRepository.insert(roles);
 
-//        userRepository.insert(new Users(
-//                "kunal",
-//                "knu@shu.com",
-//                "kunal",
-//                Collections.singletonList(
-//                        roleRepository.findByRole("USER")
-//                )
-//        ));
+    //        userRepository.insert(new Users(
+    //                "kunal",
+    //                "knu@shu.com",
+    //                "kunal",
+    //                Collections.singletonList(
+    //                        roleRepository.findByRole("USER")
+    //                )
+    //        ));
 
         userRepository.findByUsername("kunal")
                 .getRoles()

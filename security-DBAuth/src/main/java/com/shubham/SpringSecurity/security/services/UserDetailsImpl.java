@@ -7,14 +7,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
 public class UserDetailsImpl implements UserDetails {
 
 
-    private final List<? extends GrantedAuthority> grantedAuthorities;
+    private final Set<? extends GrantedAuthority> grantedAuthorities;
     private final String password;
     private final String username;
     private final Boolean isAccountNonExpired;
@@ -25,7 +25,7 @@ public class UserDetailsImpl implements UserDetails {
     private final String id;
 
     public UserDetailsImpl(
-            List<? extends GrantedAuthority> grantedAuthorities,
+            Set<? extends GrantedAuthority> grantedAuthorities,
             String password,
             String username,
             Boolean isAccountNonExpired,
@@ -45,9 +45,9 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public static UserDetailsImpl build(Users user) {
-        List<GrantedAuthority> authorities = user.getRoles().stream()
+        Set<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
 //        authorities.add(user.getRoles()
 //                .stream()
@@ -65,7 +65,6 @@ public class UserDetailsImpl implements UserDetails {
                 authorities.add(new SimpleGrantedAuthority(authorities1.getAuthority()));
             }
         });
-
         return new UserDetailsImpl(
                 authorities,
                 user.getPassword(),
@@ -79,7 +78,7 @@ public class UserDetailsImpl implements UserDetails {
         );
     }
 
-    public List<? extends GrantedAuthority> getGrantedAuthorities() {
+    public Set<? extends GrantedAuthority> getGrantedAuthorities() {
         return grantedAuthorities;
     }
 
@@ -142,4 +141,18 @@ public class UserDetailsImpl implements UserDetails {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "UserDetailsImpl{" +
+                "grantedAuthorities=" + grantedAuthorities +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", isAccountNonExpired=" + isAccountNonExpired +
+                ", isAccountNonLocked=" + isAccountNonLocked +
+                ", isCredentialsNonExpired=" + isCredentialsNonExpired +
+                ", isEnabled=" + isEnabled +
+                ", email='" + email + '\'' +
+                ", id='" + id + '\'' +
+                '}';
+    }
 }

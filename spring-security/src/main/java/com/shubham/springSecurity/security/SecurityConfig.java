@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
+        System.out.println(ADMIN.getGrantedAuthorities());
         UserDetails shuLat = User.builder().username("shu").password(passwordEncoder.encode("12as"))
                 // .roles(ApplicationUserRole.ADMIN.name())
                 .authorities(ADMIN.getGrantedAuthorities())
