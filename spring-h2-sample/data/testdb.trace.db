@@ -1,0 +1,6 @@
+2020-07-15 21:39:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found; SQL statement:
+select users0_.id as id1_2_, users0_.email as email2_2_, users0_.password as password3_2_, users0_.username as username4_2_ from users users0_ [42102-199]
+2020-07-15 21:42:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "AUTHORITIES" not found; SQL statement:
+insert into authorities (id, authority) values (null, ?) [42102-199]
