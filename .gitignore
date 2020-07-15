@@ -12,6 +12,7 @@ target/
 /security-DBAuth-jwt/src/main/resources/application.properties
 /security-DBAuth-jwt/*.zip
 /spring-h2-sample/src/main/resources/application.properties
+/spring-h2-sample/data
 
 ### STS ###
 .apt_generated
