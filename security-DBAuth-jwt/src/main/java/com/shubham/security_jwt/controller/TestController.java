@@ -34,32 +34,6 @@ public class TestController {
 
     @GetMapping("/")
     public String defaultGet() {
-//        userRepository.insert(new Users(
-//                "knu",
-//                "knu@shu.com",
-//                passwordConfig.passwordEncoder().encode("12as"),
-//                Collections.singletonList(
-//                        roleRepository.findByRole("USER")
-//                )
-//        ));
-//
-//        userRepository.insert(new Users(
-//                "shu",
-//                "shu@shu.com",
-//                passwordConfig.passwordEncoder().encode("12as"),
-//                Arrays.asList(
-//                        roleRepository.findByRole("USER"),
-//                        roleRepository.findByRole("ADMIN")
-//                )
-//        ));
-
-//        List<Role> roles = Collections.singletonList(
-//                new Role("USER", Collections.singletonList(
-//                        authoritiesRepository.findByAuthority("user:read")
-//                ))
-//        );
-//
-//        roleRepository.insert(roles);
         return "STUDENT api in memory authentication DB Auth";
     }
 

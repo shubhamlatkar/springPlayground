@@ -1,6 +1,7 @@
 package com.shubham.security_jwt.controller;
 
 import com.shubham.security_jwt.document.payload.request.LoginRequest;
+import com.shubham.security_jwt.document.payload.request.SignupRequest;
 import com.shubham.security_jwt.document.payload.response.JwtResponse;
 import com.shubham.security_jwt.security.jwt.JwtTokenUtil;
 import com.shubham.security_jwt.security.services.UserDetailsImpl;
@@ -26,6 +27,11 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetails;
         this.jwtTokenUtil = jwtTokenUtil;
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> signupUser(@RequestBody SignupRequest signupRequest) throws Exception {
+         return userDetailsService.saveUser(signupRequest) ? ResponseEntity.ok().body("Saved") : ResponseEntity.badRequest().body("Bad Cerd");
     }
 
     @PostMapping("/login")
