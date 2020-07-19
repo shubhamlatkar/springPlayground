@@ -1,23 +1,19 @@
-# Spring Boot and spring security sample with DB Authentication  
-## Basic Auth with DB Authentication
+# Spring Boot and spring security sample with in memory Authentication  
+## Basic Auth with in memory Authentication
 ### REST end point for now only sysout(method) or return static students object
 
-A minimal, secure RESTFUL api for Spring Boot   . This project includes basic http login, access control of end-points, and encrypted hashing of passwords right out of the box!
+A minimal, secure RESTFUL api for Spring Boot. This project includes basic http login, access control of end-points, and encrypted hashing of passwords right out of the box!
 
-# Installation
+## Installation
 
 - Clone the repo by using `git clone`.
 - Add the DB properties in application.properties.
 - Run `mvn spring-boot:run` on the cloned directory.
 - Visit `http://localhost:8080/inset/sample/users` to insert authorities, roles and sample users.
  
-# Steps to add new API
-
+## Steps to add new API
 - Copy the test controller model (models) to a new file in the **controller** package and make the modifications for routs.
-
 `copy com.shubham.SpringSecurity.controller.TestController.java --> com.shubham.SpringSecurity.controller.CustomController.java`
-
-
 - Add the routing line to CustomController , like so:
 
 ```
@@ -27,11 +23,8 @@ public String defaultGet() {
 }
 ```
 
-# Running the software
-
+## Running the software
 - `mvn spring-boot:run` for simple setups.
-
-# Creating users
 
 #### Can be access having ROLE_USER
 To create users, simply send a GET to /api/students/{id} with the required fields in the query string, like so:
@@ -64,8 +57,6 @@ http://localhost:8080/management/students/
 | POST | `http://host:8080/management/students` | sout(post student) |
 | DELETE | `http://host:8080/management/students/{id}` | sout(del) |
 | PUT | `http://host:8080/management/students/{id}` | sout(put student) |
-
-
 
 
 
