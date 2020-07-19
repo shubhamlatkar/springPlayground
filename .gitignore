@@ -10,7 +10,7 @@ target/
 **/application.properties
 /security-DBAuth/src/main/resources/application.properties
 /security-DBAuth-jwt/src/main/resources/application.properties
-/security-DBAuth-jwt/*.zip
+/security-DBAuth/**/resources
 /spring-h2-sample/src/main/resources/application.properties
 /spring-h2-sample/data
 /spring-cloud/**/src/main/resources

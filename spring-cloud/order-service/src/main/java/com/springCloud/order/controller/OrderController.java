@@ -28,6 +28,7 @@ public class OrderController {
         return "Inserted...";
     }
 
+
     @GetMapping("/")
     public ResponseEntity<List<Orders>> getDefault() {
         return ResponseEntity.ok(orderRepository.findAll());

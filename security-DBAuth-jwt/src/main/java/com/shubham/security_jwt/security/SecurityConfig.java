@@ -1,5 +1,6 @@
 package com.shubham.security_jwt.security;
 
+import com.shubham.security_jwt.security.config.CORSFilter;
 import com.shubham.security_jwt.security.config.PasswordConfig;
 import com.shubham.security_jwt.security.jwt.JwtReqFilter;
 import com.shubham.security_jwt.security.services.UserDetailsServiceImpl;
@@ -15,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -24,12 +26,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtReqFilter jwtReqFilter;
     private final PasswordConfig passwordConfig;
+    private final CORSFilter corsFilter;
 
     @Autowired
-    public SecurityConfig(JwtReqFilter jwtReqFilter, PasswordConfig passwordConfig) {
+    public SecurityConfig(JwtReqFilter jwtReqFilter, PasswordConfig passwordConfig, CORSFilter corsFilter) {
         this.jwtReqFilter = jwtReqFilter;
         this.passwordConfig = passwordConfig;
+        this.corsFilter = corsFilter;
     }
+
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -53,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/test/**").hasRole("USER")
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
+        http.addFilterBefore(corsFilter, ChannelProcessingFilter.class);
         http.addFilterBefore(jwtReqFilter, UsernamePasswordAuthenticationFilter.class);
     }
 

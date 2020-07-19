@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class TestController {
 
     private final RoleRepository roleRepository;
