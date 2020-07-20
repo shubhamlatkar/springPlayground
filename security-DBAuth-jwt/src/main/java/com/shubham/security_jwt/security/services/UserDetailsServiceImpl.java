@@ -61,7 +61,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public Boolean saveUser(SignupRequest signupRequest) {
-        if( userRepository.existsByUsername(signupRequest.getUsername()) || userRepository.existsByEmail(signupRequest.getEmail()))
+        if (userRepository.existsByUsername(signupRequest.getUsername()) || userRepository.existsByEmail(signupRequest.getEmail()))
             return false;
 
         List<Role> roles = signupRequest
@@ -75,7 +75,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         signupRequest.getUsername(),
                         signupRequest.getEmail(),
                         passwordConfig.passwordEncoder().encode(signupRequest.getPassword()),
-                        roles
+                        roles,
+                        null
                 )
         );
         return true;

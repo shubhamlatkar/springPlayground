@@ -1,4 +1,4 @@
-package com.shubham.security_jwt.security.config;
+package com.shubham.security_jwt.security.jwt;
 
 
 import org.springframework.stereotype.Component;

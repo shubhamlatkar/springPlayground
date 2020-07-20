@@ -1,6 +1,6 @@
 package com.shubham.security_jwt.security;
 
-import com.shubham.security_jwt.security.config.CORSFilter;
+import com.shubham.security_jwt.security.jwt.CORSFilter;
 import com.shubham.security_jwt.security.config.PasswordConfig;
 import com.shubham.security_jwt.security.jwt.JwtReqFilter;
 import com.shubham.security_jwt.security.services.UserDetailsServiceImpl;
