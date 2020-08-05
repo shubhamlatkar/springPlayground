@@ -15,6 +15,8 @@ target/
 /spring-h2-sample/src/main/resources/application.properties
 /spring-h2-sample/data
 /spring-cloud/**/src/main/resources
+**/data/
+
 
 ### STS ###
 .apt_generated
