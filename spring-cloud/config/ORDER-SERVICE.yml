@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url=jdbc:h2:file:C:/Users/91960/Projects/springPlayground/spring-cloud/order-service/data/testDB
+    
+server:
+  port: 8082
+
+greeting: ORDER_SERVICE_GREETING

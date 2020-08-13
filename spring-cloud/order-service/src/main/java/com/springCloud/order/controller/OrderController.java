@@ -3,6 +3,7 @@ package com.springCloud.order.controller;
 import com.springCloud.order.model.Orders;
 import com.springCloud.order.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/order")
 public class OrderController {
+
+    @Value("${greeting}")
+    private String greeting;
 
     private final OrderRepository orderRepository;
 
@@ -32,5 +36,10 @@ public class OrderController {
     @GetMapping("/")
     public ResponseEntity<List<Orders>> getDefault() {
         return ResponseEntity.ok(orderRepository.findAll());
+    }
+
+    @GetMapping("/greeting")
+    public ResponseEntity<?> getGreeting() {
+        return ResponseEntity.ok(greeting);
     }
 }

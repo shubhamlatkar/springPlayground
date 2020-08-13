@@ -1,6 +1,5 @@
 package com.shubham.security_jwt.controller;
 
-import com.shubham.security_jwt.document.Authorities;
 import com.shubham.security_jwt.document.Role;
 import com.shubham.security_jwt.document.Tokens;
 import com.shubham.security_jwt.document.Users;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 @RestController
@@ -57,42 +55,42 @@ public class AuthController {
 
     @GetMapping("/insert/roles")
     public ResponseEntity<?> insertUsers() {
-        userRepository.deleteAll();
-        roleRepository.deleteAll();
-        authoritiesRepository.deleteAll();
-
-        authoritiesRepository.saveAll(
-                Arrays.asList(
-                        new Authorities("student:read"),
-                        new Authorities("student:write")
-                )
-        );
-
-        Role userRole = new Role("USER");
-        userRole.addAuthority(authoritiesRepository.findByAuthority("student:read"));
-        roleRepository.save(userRole);
-
-        Role adminRole = new Role("ADMIN");
-        adminRole.addAuthority(authoritiesRepository.findByAuthority("student:read"));
-        adminRole.addAuthority(authoritiesRepository.findByAuthority("student:write"));
-        roleRepository.save(adminRole);
-
-        Users shuUser = new Users(
-                "shu",
-                "shu@shu.com",
-                passwordConfig.passwordEncoder().encode("12as")
-        );
-        shuUser.addRole(roleRepository.findByRole("USER"));
-        shuUser.addRole(roleRepository.findByRole("ADMIN"));
-        userRepository.save(shuUser);
-
-        Users knuUser = new Users(
-                "knu",
-                "knu@shu.com",
-                passwordConfig.passwordEncoder().encode("12as")
-        );
-        knuUser.addRole(roleRepository.findByRole("USER"));
-        userRepository.save(knuUser);
+//        userRepository.deleteAll();
+//        roleRepository.deleteAll();
+//        authoritiesRepository.deleteAll();
+//
+//        authoritiesRepository.saveAll(
+//                Arrays.asList(
+//                        new Authorities("student:read"),
+//                        new Authorities("student:write")
+//                )
+//        );
+//
+//        Role userRole = new Role("USER");
+//        userRole.addAuthority(authoritiesRepository.findByAuthority("student:read"));
+//        roleRepository.save(userRole);
+//
+//        Role adminRole = new Role("ADMIN");
+//        adminRole.addAuthority(authoritiesRepository.findByAuthority("student:read"));
+//        adminRole.addAuthority(authoritiesRepository.findByAuthority("student:write"));
+//        roleRepository.save(adminRole);
+//
+//        Users shuUser = new Users(
+//                "shu",
+//                "shu@shu.com",
+//                passwordConfig.passwordEncoder().encode("12as")
+//        );
+//        shuUser.addRole(roleRepository.findByRole("USER"));
+//        shuUser.addRole(roleRepository.findByRole("ADMIN"));
+//        userRepository.save(shuUser);
+//
+//        Users knuUser = new Users(
+//                "knu",
+//                "knu@shu.com",
+//                passwordConfig.passwordEncoder().encode("12as")
+//        );
+//        knuUser.addRole(roleRepository.findByRole("USER"));
+//        userRepository.save(knuUser);
 
         return ResponseEntity.ok().body(userRepository.findAll());
     }
