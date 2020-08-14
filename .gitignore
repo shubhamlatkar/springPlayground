@@ -43,3 +43,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Theia ###
+.theia/

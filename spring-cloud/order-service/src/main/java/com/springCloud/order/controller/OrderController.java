@@ -5,11 +5,8 @@ import com.springCloud.order.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -26,16 +23,37 @@ public class OrderController {
         this.orderRepository = orderRepository;
     }
 
-    @GetMapping("/insert")
-    public String insertData() {
-        orderRepository.saveAll(Arrays.asList(new Orders(1l, "1 veg sandwich"), new Orders(2l, "1 cold coffee")));
-        return "Inserted...";
-    }
-
 
     @GetMapping("/")
     public ResponseEntity<List<Orders>> getDefault() {
         return ResponseEntity.ok(orderRepository.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Orders>> getByUserId(@PathVariable Long id) {
+        return ResponseEntity.ok(orderRepository.findByUserId(id));
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<?> postOrder(@RequestBody Orders order) {
+        return ResponseEntity.ok(orderRepository.save(order));
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<?> putOrder(@RequestBody Orders order) {
+        Orders found = orderRepository.findById(order.getId()).orElse(null);
+         if(found != null) {
+             found.setDesc(order.getDesc());
+             found.setUserId(order.getUserId());
+             return ResponseEntity.ok(orderRepository.save(found));
+         } else
+             return ResponseEntity.ok(orderRepository.save(order));
+    }
+
+    @DeleteMapping("/")
+    public ResponseEntity<?> deleteOrder(@RequestBody Orders order) {
+        orderRepository.delete(order);
+        return ResponseEntity.ok("Deleted....");
     }
 
     @GetMapping("/greeting")
