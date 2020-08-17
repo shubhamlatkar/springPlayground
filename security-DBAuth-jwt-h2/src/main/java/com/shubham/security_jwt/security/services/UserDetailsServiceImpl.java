@@ -60,6 +60,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public Boolean saveUser(SignupRequest signupRequest) {
+        System.out.println(userRepository.existsByUsername(signupRequest.getUsername()) || userRepository.existsByEmail(signupRequest.getEmail()));
+
         if (userRepository.existsByUsername(signupRequest.getUsername()) || userRepository.existsByEmail(signupRequest.getEmail()))
             return false;
 

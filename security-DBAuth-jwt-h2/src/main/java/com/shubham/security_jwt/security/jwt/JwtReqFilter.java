@@ -68,7 +68,7 @@ public class JwtReqFilter extends OncePerRequestFilter {
         }
 
         Users user = userRepository.findByUsername(username).orElse(null);
-        System.out.println(user);
+
         String finalJwt = jwt;
         if (user != null) {
             if (!tokenRepository.existsByToken(finalJwt) && username != null)

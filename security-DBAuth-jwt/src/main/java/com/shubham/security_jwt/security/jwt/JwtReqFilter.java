@@ -5,6 +5,9 @@ import com.shubham.security_jwt.document.Users;
 import com.shubham.security_jwt.repository.UserRepository;
 import com.shubham.security_jwt.security.services.UserDetailsImpl;
 import com.shubham.security_jwt.security.services.UserDetailsServiceImpl;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -51,20 +54,27 @@ public class JwtReqFilter extends OncePerRequestFilter {
 
         String username = null;
         String jwt = null;
-        if (authorization != null && authorization.startsWith("Bearer ")) {
-            jwt = authorization.substring(7);
-            username = jwtTokenUtil.getUsernameFromToken(jwt);
-        } else if (cookieJWT != null) {
-            username = jwtTokenUtil.getUsernameFromToken(cookieJWT);
+        try {
+            if (authorization != null && authorization.startsWith("Bearer ")) {
+                jwt = authorization.substring(7);
+                username = jwtTokenUtil.getUsernameFromToken(jwt);
+            } else if (cookieJWT != null) {
+                username = jwtTokenUtil.getUsernameFromToken(cookieJWT);
+            }
+        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException e) {
+            httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN, "Unauthorized...");
+            return;
         }
 
-        Users user = userRepository.findByUsername(username).orElse(null);
+        Users user = null;
+        if (username != null)
+            user = userRepository.findByUsername(username).orElse(null);
         String finalJwt = jwt;
         if (user != null) {
             List<String> activeTokens = user.getActiveTokens();
-            if (!activeTokens.contains(finalJwt.toString()) && username != null)
-                httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
-                userBean.setUser(user, jwt);
+            if (!activeTokens.contains(finalJwt.toString()))
+                httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN, "Unauthorized...");
+            userBean.setUser(user, jwt);
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

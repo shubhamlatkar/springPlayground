@@ -9,7 +9,9 @@ A minimal, secure RESTFUL api for Spring Boot. This project includes login, acce
 - Clone the repo by using `git clone`.
 - Add the DB properties in application.properties.
 - Run `mvn spring-boot:run` on the cloned directory.
- 
+- Add ```spring.data.mongodb.uri``` to properties file.
+- Also add ```jwt.secret``` to your properties.
+
 ## Points to get started
 - All the rest end points are secured with spring security.
 - In order to access secured end points you need to add ```Authorization: Bearer {{token}}``` in header.
