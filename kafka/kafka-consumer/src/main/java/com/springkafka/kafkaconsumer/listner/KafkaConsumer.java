@@ -1,14 +1,14 @@
 package com.springkafka.kafkaconsumer.listner;
 
 import com.springkafka.kafkaconsumer.model.User;
-import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Service;
 
 @Service
 public class KafkaConsumer {
 
-    @KafkaListener(topics = "Kafka_Example", groupId = "group_json", containerFactory = "userKafkaListenerFactory")
-    public void userConsumer(User user) {
+    @StreamListener("input")
+    public void consumeUser(User user) {
         System.out.println(user);
     }
 

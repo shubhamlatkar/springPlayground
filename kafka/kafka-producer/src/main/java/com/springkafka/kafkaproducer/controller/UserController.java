@@ -2,9 +2,10 @@ package com.springkafka.kafkaproducer.controller;
 
 import com.springkafka.kafkaproducer.model.User;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,18 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/kafka")
 public class UserController {
 
+    private final MessageChannel output;
 
-    private KafkaTemplate<String, User> kafkaTemplate;
-    private static final String TOPIC = "Kafka_Example";
-
-    public UserController(KafkaTemplate<String, User> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
+    public UserController(MessageChannel output) {
+        this.output = output;
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<?> defaultGet(@PathVariable String username) {
-        User user = new User(1l, username);
-        kafkaTemplate.send(TOPIC, user);
+
+    @PostMapping("/")
+    public ResponseEntity<?> postUser(@RequestBody User user) {
+        output.send(MessageBuilder.withPayload(user).build());
         return ResponseEntity.ok(user);
     }
 }
