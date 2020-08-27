@@ -1,17 +1,33 @@
 # Spring Boot Sample Projects
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/shubhamlatkar/mentor-on-demand-backend)
+[![Spring Spring-Boot](https://img.shields.io/badge/Spring-Spring_boot-green?logo=spring)](https://start.spring.io/)
+[![MongoDb Database](https://img.shields.io/badge/MongoDB-Database-47A248?logo=mongodb)](https://cloud.mongodb.com/)
+[![Intellij Intellij-idea](https://img.shields.io/badge/Intellij-Intellij_idea-black?logo=intellij-idea)](https://www.jetbrains.com/idea/)
+
 
 This repo contains sample mvn spring-boot projects for:-
 
-  - [spring-mongodb](https://github.com/shubhamlatkar/springPlayground/tree/master/spring-mongodb) contains Spring-Bot JPA and Mongo Repoitory.
+  - [spring-mongodb](https://github.com/shubhamlatkar/springPlayground/tree/master/spring-mongodb) contains Spring-Bot JPA and Mongo Repository.
   - [spring-h2-sample](https://github.com/shubhamlatkar/springPlayground/tree/master/spring-h2-sample) H2 in memory DB sample with spring boot .
   - [spring-security](https://github.com/shubhamlatkar/springPlayground/tree/master/spring-security) Spring security with in memory users and Http basic auth for REST Api's.
-  - [spring-DBAuth](https://github.com/shubhamlatkar/springPlayground/tree/master/security-DBAuth) Spring security with DB integreated Http basic auth for REST Apis's.
-  - [spring-DBAuth-jwt](https://github.com/shubhamlatkar/springPlayground/tree/master/security-DBAuth-jwt) Spring security with DB integreated JWT token auth for REST Apis's.
-  - [spring-cloud](https://github.com/shubhamlatkar/springPlayground/tree/master/spring-cloud) Sample spring boot micorservices with eureka server and eireka client with api-gateway. 
+  - [spring-DBAuth](https://github.com/shubhamlatkar/springPlayground/tree/master/security-DBAuth) Spring security with DB integrated Http basic auth for REST Apis's.
+  - [spring-DBAuth-jwt](https://github.com/shubhamlatkar/springPlayground/tree/master/security-DBAuth-jwt) Spring security with DB integrated JWT token auth for REST Apis's.
+  - [spring-cloud](https://github.com/shubhamlatkar/springPlayground/tree/master/spring-cloud) Sample spring boot microservices with eureka server and eureka client with api-gateway.
+  - [spring-kafka](https://github.com/shubhamlatkar/springPlayground/tree/master/kafka) Spring Cloud event driven example using kafka asa event bus.   
+  - [spring-boot-gradle](https://github.com/shubhamlatkar/springPlayground/tree/master/user-service) Sample spring boot project with gradle.   
+  - [config](https://github.com/shubhamlatkar/springPlayground/tree/master/config) Spring configurations folder.
+  
+### [Spring-boot-gradle](https://github.com/shubhamlatkar/springPlayground/tree/master/user-service)
+###### Sample spring boot project with gradle:-
 
+### [Spring-Kafka](https://github.com/shubhamlatkar/springPlayground/tree/master/kafka)
+##### Sample For spring cloud streams using apache kafka as event bus:-
+* [kafka-server](https://github.com/shubhamlatkar/springPlayground/tree/master/kafka/kafka-server) Kafka and zookeeper docker-compose container.
+* [kafka-consumer](https://github.com/shubhamlatkar/springPlayground/tree/master/kafka/kafka-consumer) Spring cloud streams cloud consumer consuming messages on the topic from kafka.
+* [kafka-consumer](https://github.com/shubhamlatkar/springPlayground/tree/master/kafka/kafka-consumer) Spring cloud streams cloud producer producing messages on the topic to kafka.
+    
 ### [Spring Cloud](https://github.com/shubhamlatkar/springPlayground/tree/master/spring-cloud)
-##### Sample Eureka server with eureka clients micoroservices and hystrix dashboard for fallback and monitoring:-
+##### Sample Eureka server with eureka clients microservices and hystrix dashboard for the fallback and monitoring:-
 * [eureka-server](https://github.com/shubhamlatkar/springPlayground/tree/master/spring-cloud/eureka-server) Eureka server for the microservices.
 * [api-gateway](https://github.com/shubhamlatkar/springPlayground/tree/master/spring-cloud/api-gateway) Api gateway for Users and Orders service.
 * [hystrix-dashboard](https://github.com/shubhamlatkar/springPlayground/tree/master/spring-cloud/hystrixDashboard) Hystrix dashboard for monitoring services.

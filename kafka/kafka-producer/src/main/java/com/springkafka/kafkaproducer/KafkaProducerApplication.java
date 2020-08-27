@@ -1,12 +1,12 @@
 package com.springkafka.kafkaproducer;
 
+import com.springkafka.kafkaproducer.config.KafkaConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.messaging.Source;
 
 @SpringBootApplication
-@EnableBinding(Source.class)
+@EnableBinding(KafkaConfig.class)
 public class KafkaProducerApplication {
 
 	public static void main(String[] args) {

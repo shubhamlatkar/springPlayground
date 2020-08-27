@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaConsumer {
 
-    @StreamListener("input")
+
+    @StreamListener(target = "kafkaExample")
     public void consumeUser(User user) {
         System.out.println(user);
     }
