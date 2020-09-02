@@ -10,13 +10,14 @@ import org.springframework.context.annotation.Scope;
 @SpringBootApplication
 public class SecurityWithJwt {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SecurityWithJwt.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SecurityWithJwt.class, args);
+    }
 
-	@Bean
-	@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-	public UserBean getCurrentUser() {
-		return new UserBean();
-	}
+    @Bean
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+    public UserBean getCurrentUser() {
+        return new UserBean();
+    }
+
 }
