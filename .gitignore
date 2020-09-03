@@ -17,6 +17,7 @@ target/
 /spring-cloud/**/src/main/resources
 **/data/
 **/logs/
+**/volumes/
 
 ### STS ###
 .apt_generated
