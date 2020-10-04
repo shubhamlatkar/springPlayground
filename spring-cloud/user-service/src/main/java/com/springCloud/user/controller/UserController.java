@@ -73,4 +73,10 @@ public class UserController {
         return ResponseEntity.ok(userRepository.findByUsername(username));
     }
 
+    @GetMapping("/getName/{id}")
+    public ResponseEntity<?> getByUsername(@PathVariable Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        return ResponseEntity.ok(user.getUsername());
+    }
+
 }

@@ -15,10 +15,11 @@ public class UserService {
         SpringApplication.run(UserService.class, args);
     }
 
-	@Bean
-	@LoadBalanced
-	public RestTemplate restTemplate(){
-		return new RestTemplate();
-	}
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
 
 }

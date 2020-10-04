@@ -18,11 +18,12 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long userId;
+    private String name;
     private String desc;
 
-    public Orders(long userId, String desc) {
+    public Orders(long userId, String name, String desc) {
         this.userId = userId;
+        this.name = name;
         this.desc = desc;
     }
-
 }
