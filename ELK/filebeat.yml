@@ -1,0 +1,17 @@
+filebeat:
+  inputs:
+    -
+      paths:
+        - /usr/share/logData/*.log
+      input_type: log
+      multiline.pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}'
+      multiline.negate: true
+      multiline.match: after
+
+output:
+  logstash:
+    hosts: ["elk:5044"]
+    ssl:
+      certificate_authorities:
+        - /etc/pki/tls/certs/logstash-beats.crt
+

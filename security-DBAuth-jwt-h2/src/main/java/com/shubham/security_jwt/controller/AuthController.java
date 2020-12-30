@@ -88,6 +88,7 @@ public class AuthController {
         return ResponseEntity.ok().body(userRepository.findAll());
     }
 
+
     @PostMapping("/signup")
     public ResponseEntity<?> signupUser(@Valid @RequestBody SignupRequest signupRequest, BindingResult result) throws Exception {
         return authService.signup(signupRequest,result);

@@ -3,11 +3,11 @@ package com.user.userservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
+@Controller
 public class UserServiceApplication {
 
 	public static void main(String[] args) {
@@ -15,7 +15,7 @@ public class UserServiceApplication {
 	}
 
 	@GetMapping("/")
-	public ResponseEntity<?> defaultGet() {
-		return ResponseEntity.ok("Hello");
+	public String defaultGet() {
+		return "index";
 	}
 }

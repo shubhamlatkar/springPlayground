@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.4.2
+    volumes:
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./logstash-beats.crt:/etc/pki/tls/certs/logstash-beats.crt
+      - ./logData/:/usr/share/logData/
+    ports:
+      - "80:80"
+    links:
+      - elk
+    environment:
+      - xpack.security.enabled=true
+      - xpack.security.transport.ssl.enabled=true
+
+  elk:
+    image: sebp/elk
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
