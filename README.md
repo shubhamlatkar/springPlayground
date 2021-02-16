@@ -16,6 +16,8 @@ This repo contains sample mvn spring-boot projects for:-
   - [spring-kafka](https://github.com/shubhamlatkar/springPlayground/tree/master/kafka) Spring Cloud event driven example using kafka asa event bus.   
   - [spring-boot-gradle](https://github.com/shubhamlatkar/springPlayground/tree/master/user-service) Sample spring boot project with gradle.   
   - [config](https://github.com/shubhamlatkar/springPlayground/tree/master/config) Spring configurations folder.
+  - [ELK-Stack](https://github.com/shubhamlatkar/springPlayground/tree/master/ELK) ELK stack for logs.
+  - [Logging](https://github.com/shubhamlatkar/springPlayground/tree/master/logging) Spring boot logging sample.
   
 ### [Spring-boot-gradle](https://github.com/shubhamlatkar/springPlayground/tree/master/user-service)
 ###### Sample spring boot project with gradle:-
