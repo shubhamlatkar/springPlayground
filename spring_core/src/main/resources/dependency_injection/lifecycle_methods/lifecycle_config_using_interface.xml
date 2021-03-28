@@ -1,0 +1,11 @@
+<beans
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+
+    <bean name="employee" class="com.spring_mvn.dependency_injection.life_cycle_methods.lifecycle_using_interface.Employee"
+          p:id="20"
+          p:name="test2"/>
+</beans>

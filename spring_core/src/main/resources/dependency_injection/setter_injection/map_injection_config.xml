@@ -1,0 +1,19 @@
+<beans
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+
+    <bean name="customer" class="com.spring_mvn.dependency_injection.setter_injection.map_injection.Customer">
+        <property name="name">
+            <value>Tom</value>
+        </property>
+        <property name="products">
+            <map>
+                <entry key="1" value="book"/>
+                <entry key="2" value="pen"/>
+                <entry key="3" value="pencil"/>
+            </map>
+        </property>
+    </bean>
+</beans>

@@ -1,0 +1,14 @@
+<beans
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+
+    <bean name="scores" class="com.spring_mvn.auto_wiring.by_type.Scores" p:maths="12"
+          p:chemistry="23" p:physics="34"/>
+
+    <bean name="student" class="com.spring_mvn.auto_wiring.by_type.Student" autowire="byType" p:name="test"/>
+
+
+</beans>

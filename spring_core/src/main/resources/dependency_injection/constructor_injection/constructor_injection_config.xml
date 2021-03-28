@@ -1,0 +1,20 @@
+<beans
+        xmlns:c="http://www.springframework.org/schema/c"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+
+    <!--    <bean name="hospital" class="com.spring_mvn.dependency_injection.constructor_injection.Hospital"-->
+    <!--    >-->
+    <!--        <constructor-arg>-->
+    <!--            <value>1</value>-->
+    <!--        </constructor-arg>-->
+    <!--        <constructor-arg>-->
+    <!--            <value>test</value>-->
+    <!--        </constructor-arg>-->
+    <!--    </bean>-->
+
+    <bean name="hospital" class="com.spring_mvn.dependency_injection.constructor_injection.Hospital" c:id="12"
+          c:name="test1"/>
+</beans>

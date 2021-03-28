@@ -1,0 +1,16 @@
+<beans
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+>
+
+    <bean name="scores" class="com.spring_mvn.auto_wiring.by_annotations.Scores" p:maths="08"
+          p:chemistry="09" p:physics="07"/>
+    <bean name="new_scores" class="com.spring_mvn.auto_wiring.by_annotations.Scores" p:maths="02"
+    p:chemistry="01" p:physics="03"/>
+    <bean name="student" class="com.spring_mvn.auto_wiring.by_annotations.Student" p:name="test_by_annotations"/>
+
+    <context:annotation-config/>
+</beans>

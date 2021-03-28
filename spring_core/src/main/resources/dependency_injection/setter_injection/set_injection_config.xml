@@ -1,0 +1,19 @@
+<beans
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+
+    <bean name="hospital" class="com.spring_mvn.dependency_injection.setter_injection.set_injection.Hospital">
+        <property name="name">
+            <value>city hospital</value>
+        </property>
+        <property name="doctors">
+            <set>
+                <value>john</value>
+                <value>tom</value>
+                <value>sam</value>
+            </set>
+        </property>
+    </bean>
+</beans>
