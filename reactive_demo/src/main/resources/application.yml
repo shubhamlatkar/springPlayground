@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: REACTIVE_SERVICE
+  data:
+    mongodb:
+      uri: ${MONGO_URI}
+  repositories:
+    enabled: true
