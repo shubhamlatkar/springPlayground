@@ -14,7 +14,11 @@ COPY pom.xml .
 COPY ./src ./src
 COPY ./pom.xml ./pom.xml
 
+RUN chmod 755 /app/mvnw
+
 RUN ./mvnw dependency:go-offline -B
+
+RUN ./mvnw package -DskipTests
 
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app/target/securityWithJwtH2-0.0.1-SNAPSHOT.jar"]
