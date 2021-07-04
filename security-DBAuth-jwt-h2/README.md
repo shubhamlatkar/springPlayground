@@ -1,16 +1,32 @@
-# Spring Boot and spring security sample with H2 DB Authentication and JWT.  
-## H2 DB Auth with JWT token. 
+# Spring Boot and spring security sample with H2 DB Authentication and JWT.
+
+## H2 DB Auth with JWT token.
+
 ### REST end point for now only modifies or returns a static student object.
 
-A minimal, secure RESTFUL api for Spring Boot. This project includes login, access control of end-points, and encrypted hashing of passwords right out of the box!
+A minimal, secure RESTFUL api for Spring Boot. This project includes login, access control of end-points, and encrypted
+hashing of passwords right out of the box!
 
-# Installation
+## Running through docker
+
+To build the image
+```
+docker build -t h2auth .
+```
+
+To run the image
+```
+docker run -p 8080:8080 h2auth
+```
+
+## Installation
 
 - Clone the repo by using `git clone`.
 - Add the DB properties in application.properties.
 - Run `mvn spring-boot:run` on the cloned directory.
- 
+
 ## Points to get started
+
 - All the rest end points are secured with spring security.
 - In order to access secured end points you need to add ```Authorization: Bearer {{token}}``` in header.
 - Rest end points are accessible to selected roles only.
@@ -18,14 +34,15 @@ A minimal, secure RESTFUL api for Spring Boot. This project includes login, acce
 - ROLE_TRAINER can read all the students.
 - ROLE_ADMIN can read, write, modify, delete students.
 - STUDENTS is a static array of STUDENTS.
- 
 
 # Running the software
+
 - `mvn spring-boot:run` for simple setups.
- 
+
 ## Endpoints
- 
+
 ### API Endpoints AUTH
+
 | Method | Url                                      | Expected Input                   | Header Required                       | Expected Output                    |
 | ------ | ---------------------------------------- | -------------------------------- | ------------------------------------- | ---------------------------------- |
 | POST   | `http://host:8080/auth/login`            | [SignUpRequest](#SignUpRequest)  |                                       | String                             |    
@@ -36,6 +53,7 @@ A minimal, secure RESTFUL api for Spring Boot. This project includes login, acce
 | DELETE | `http://host:8080/auth/`                 |                                  | ```Authorization: Bearer {{token}}``` | String                             |
 
 ### API End points STUDENTS
+
 | Method | Url                                      | Expected Input                   | Required Role        | Expected Output     | Header Required                       |
 | ------ | ---------------------------------------- | -------------------------------- | -------------------- | ------------------- | ------------------------------------- |
 | POST   | `http://host:8080/student/`              | [Student](#Student)              | ADMIN                | String              | ```Authorization: Bearer {{token}}``` |
@@ -47,6 +65,7 @@ A minimal, secure RESTFUL api for Spring Boot. This project includes login, acce
 ## Documents
 
 ### SignUpRequest
+
 | Name      | Type   | Description                | Required |
 | ------    | ------ | -------------------------- | -------- |
 | Username  | String | Username of user           | Yes      |
@@ -55,12 +74,14 @@ A minimal, secure RESTFUL api for Spring Boot. This project includes login, acce
 | Password  | String | password                   | Yes      |
 
 ### LoginRequest
+
 | Name      | Type   | Description                | Required |
 | ------    | ------ | -------------------------- | -------- |
 | Username  | String | Username of user           | Yes      |
 | Password  | String | password                   | Yes      |
 
 ### LoginResponse
+
 | Name      | Type   | Description                |
 | ------    | ------ | -------------------------- |
 | Token     | String | JWT Token                  |
@@ -69,6 +90,7 @@ A minimal, secure RESTFUL api for Spring Boot. This project includes login, acce
 | Username  | String | Username of user           |
 
 ### Student
+
 | Name      | Type   | Description                | Required |
 | ------    | ------ | -------------------------- | -------- |
 | id        | Long   | id of user                 | Yes      |
