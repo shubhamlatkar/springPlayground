@@ -21,7 +21,7 @@ public class ManageAccountController {
     }
 
     @GetMapping("/get-account")
-    public ResponseEntity<Account> getAccount(@RequestParam String id) {
+    public ResponseEntity<String> getAccount(@RequestParam String id) {
         Account account = queryGateway.query(
                 new FindAccountByIdQuery(id), Account.class
         ).join();
@@ -30,6 +30,6 @@ public class ManageAccountController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(account, HttpStatus.OK);
+        return new ResponseEntity<>(account.getStatus(), HttpStatus.OK);
     }
 }
