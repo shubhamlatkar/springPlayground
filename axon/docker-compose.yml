@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+
+  axonserver:
+    image: axoniq/axonserver
+    container_name: axonserver
+    hostname: axonserver
+    environment:
+      - AXONSERVER_HOSTNAME=axonserver
+    ports:
+      - 8024:8024
+
+  service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: service
+    container_name: service
+    ports:
+      - 8080:8080
+    depends_on:
+      - axonserver
+    environment:
+      - AXONSERVER_HOST=axonserver
+    restart: always
