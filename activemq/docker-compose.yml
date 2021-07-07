@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+
+  activemq:
+    image: webcenter/activemq
+    container_name: activemq
+    ports:
+      # ui
+      - 8161:8161
+      # jms
+      - 61616:61616
+    environment:
+      ACTIVEMQ_STATIC_QUEUES: test-queue
+      ACTIVEMQ_ENABLED_SCHEDULER: "true"
+      ACTIVEMQ_MIN_MEMORY: 512
+      ACTIVEMQ_MAX_MEMORY: 2048
+
+  angrok:
+    image: wernight/ngrok
+    container_name: angrok
+    ports:
+      - 4040:4040
+    environment:
+      NGROK_AUTH: ${ACTIVE_MQ_AUTH_TOKEN}
+      NGROK_PROTOCOL: TCP
+      NGROK_LOOK_DOMAIN: activemq
+      NGROK_PORT: 61616
+
+  database:
+    image: mongo:latest
+    restart: always
+    container_name: database
+
+  mngrok:
+    image: wernight/ngrok
+    container_name: mngrok
+    ports:
+      - 4041:4040
+    environment:
+      NGROK_AUTH: ${MONGO_AUTH_TOKEN}
+      NGROK_PROTOCOL: TCP
+      NGROK_LOOK_DOMAIN: database
+      NGROK_PORT: 27017
