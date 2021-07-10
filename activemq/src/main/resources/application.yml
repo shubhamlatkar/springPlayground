@@ -1,11 +1,11 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://0.tcp.ngrok.io:10250/activemq-demo
+      uri: mongodb://database:27017/activemq-demo
       repositories:
         enabled: true
   activemq:
-    broker-url: tcp://2.tcp.ngrok.io:10221
+    broker-url: tcp://activemq:61616
     user: admin
     password: admin
     packages:

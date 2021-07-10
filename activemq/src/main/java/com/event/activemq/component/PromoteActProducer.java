@@ -21,6 +21,6 @@ public class PromoteActProducer {
     @Scheduled(fixedDelay = 2000)
     public void send() {
         a++;
-        this.jmsMessagingTemplate.convertAndSend("test-queue", new SystemMessage(a + " ", userRepository.findAll().toString()));
+        this.jmsMessagingTemplate.convertAndSend("authentication", new SystemMessage(a + " ", userRepository.findAll().toString()));
     }
 }

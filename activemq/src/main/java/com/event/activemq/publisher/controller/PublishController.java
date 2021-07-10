@@ -23,7 +23,7 @@ public class PublishController {
     @PostMapping("/publishMessage")
     public ResponseEntity<Object> publishMessage(@RequestBody SystemMessage systemMessage) {
         try {
-            jmsTemplate.convertAndSend("test-queue", systemMessage);
+            jmsTemplate.convertAndSend("authentication", systemMessage);
             userRepository.save(new User(systemMessage.getMessage()));
             return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
 

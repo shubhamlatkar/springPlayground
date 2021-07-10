@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class MessageConsumer {
 
 
-    @JmsListener(destination = "test-queue")
+    @JmsListener(destination = "authentication")
     public void messageListener(SystemMessage systemMessage) {
         log.info("Message received! {}", systemMessage);
     }
