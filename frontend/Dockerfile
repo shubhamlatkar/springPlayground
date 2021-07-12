@@ -5,9 +5,9 @@ WORKDIR /frontend
 
 COPY /src/main/frontend .
 
-RUN npm ci
+RUN npm i
 
-RUN npm build
+RUN npm run build
 
 #### Stage 2: Build the application
 FROM openjdk:16-jdk-alpine as service
