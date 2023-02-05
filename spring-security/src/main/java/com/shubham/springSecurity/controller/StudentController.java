@@ -22,7 +22,7 @@ public class StudentController {
 
     @GetMapping("/")
     public String defaultGet() {
-        return "STUDENT api in memory authentication";
+        return "STUDENT api in memory authentication First to get invoked";
     }
     
     @GetMapping("/api/students/{id}")
