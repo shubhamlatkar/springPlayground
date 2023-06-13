@@ -1,4 +1,4 @@
-# Spring Boot Sample Projects
+# Spring Boot Applications
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/shubhamlatkar/mentor-on-demand-backend)
 [![Spring Spring-Boot](https://img.shields.io/badge/Spring-Spring_boot-green?logo=spring)](https://start.spring.io/)
 [![MongoDb Database](https://img.shields.io/badge/MongoDB-Database-47A248?logo=mongodb)](https://cloud.mongodb.com/)
